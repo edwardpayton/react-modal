@@ -45,13 +45,13 @@ describe('Modal Component', () => {
     it('opens type image on click', () => {
       const modalImage = (
         <Modal title={'trigger text'} events={testEvents} type="image">
-          <img src="" alt="test image" />
+          <img src="" alt="test-pic" />
         </Modal>
       );
       const { getByTestId, queryAllByAltText } = render(modalImage);
       fireEvent.click(getByTestId('trigger'));
       expect(testEvents.onOpen).toHaveBeenCalledTimes(1);
-      expect(queryAllByAltText('test image')).toBeTruthy();
+      expect(queryAllByAltText('test-pic')).toBeTruthy();
     });
 
     it('inserts the content into the portal div', () => {
@@ -138,7 +138,7 @@ describe('Modal Component', () => {
       const modalTabableChildren = (
         <Modal title={'trigger text'} events={testEvents}>
           <button>test button</button>
-          <a href="#" role="button">
+          <a href="./#" role="button">
             test anchor
           </a>
           <input type="text" value="not used" readOnly />

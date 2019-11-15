@@ -13,13 +13,15 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --env=jsdom",
-    "lint": "tsdx lint"
+    "lint": "tsdx lint src"
   },
   "peerDependencies": {
     "react": ">=16.8"
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-commit": "tsdx lint src"
+    }
   },
   "prettier": {
     "printWidth": 80,

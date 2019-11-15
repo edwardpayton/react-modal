@@ -1,15 +1,11 @@
 import React from 'react';
 
 import Close from './Close';
+import { whichAnimationEvent } from '../utilities';
 
 import styles from '../styles/Dialog.module.css';
 
-export interface IAnimationEvent {
-  name?: string;
-  end?: string;
-}
-
-export interface Props {
+export interface IProps {
   isComplete: boolean;
   isErrored: boolean;
   type: string;
@@ -17,22 +13,7 @@ export interface Props {
   children: React.ReactNode;
 }
 
-export function whichAnimationEvent(): IAnimationEvent {
-  const elem = document.createElement('div');
-  const animations = [
-    { name: 'animation', end: 'animationend' },
-    { name: 'OAnimation', end: 'webkitAnimationEnd' },
-    { name: 'MozAnimation', end: 'animationend' },
-    { name: 'WebkitAnimation', end: 'webkitAnimationEnd' },
-  ];
-
-  for (const name in animations) {
-    if (elem.style[name] !== undefined) return animations[name];
-  }
-  return {};
-}
-
-const Dialog: React.FunctionComponent<Props> = ({
+const Dialog: React.FunctionComponent<IProps> = ({
   isComplete,
   isErrored,
   type,
