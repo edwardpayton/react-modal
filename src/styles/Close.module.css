@@ -1,0 +1,40 @@
+
+.close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 25px;
+  height: 25px;
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.close > span {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.close > svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  transition: fill 0.35s ease;
+}
+
+.close:hover > svg > path {
+  fill: #2600e6;
+}
+
+.close:focus > svg > path {
+  fill: rgba(38, 0, 230, 0.8);
+}
+
+.close:focus:active > svg > path {
+  fill: #000;
+}

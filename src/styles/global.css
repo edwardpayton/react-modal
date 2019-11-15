@@ -1,0 +1,12 @@
+:global * {
+  box-sizing: border-box;
+}
+
+:global .modal-open {
+  overflow: hidden;
+}
+
+:global #modalPortal {
+  width: 100%;
+  height: 100%;
+}
