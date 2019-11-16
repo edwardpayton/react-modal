@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Component rendering & click functionality renders without crashing 1`] = `
+<DocumentFragment>
+  <button
+    class="trigger"
+    data-testid="trigger"
+    type="button"
+  >
+    trigger text
+  </button>
+</DocumentFragment>
+`;

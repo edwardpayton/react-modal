@@ -31,9 +31,10 @@ describe('Modal Component', () => {
 
   describe('rendering & click functionality', () => {
     it('renders without crashing', () => {
-      const { getByTestId } = render(modal);
+      const { getByTestId, asFragment } = render(modal);
       expect(getByTestId('trigger')).toHaveTextContent('trigger text');
       expect(document.querySelector('#modalPortal')).toBeDefined();
+      expect(asFragment()).toMatchSnapshot();
     });
 
     it('opens on click', () => {
