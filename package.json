@@ -13,14 +13,21 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --env=jsdom",
-    "lint": "tsdx lint src"
+    "lint": "tsdx lint"
   },
   "peerDependencies": {
     "react": ">=16.8"
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier",
+      "git add"
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint src"
+      "pre-commit": "tsdx lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "prettier": {
@@ -30,6 +37,8 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@types/jest": "^24.0.22",
