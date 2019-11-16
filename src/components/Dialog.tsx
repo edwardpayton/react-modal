@@ -46,7 +46,6 @@ const Dialog: React.FunctionComponent<IProps> = ({
     return node.addEventListener(end, onAnimationEnd);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (modalContentRef && e.target === modalContentRef.current)
       return handleClose();

@@ -4,6 +4,8 @@ import Dialog from './Dialog';
 import Portal from './Portal';
 import Trigger from './Trigger';
 
+import '../styles/global.css';
+
 export interface IModalEvents {
   onOpen?: () => void;
   onClose?: () => void;
