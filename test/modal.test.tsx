@@ -2,11 +2,11 @@ import React from 'react';
 import { render, fireEvent, cleanup, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import Modal from '..';
-import { IModalEvents } from '../components/Modal';
-import { whichAnimationEvent } from '../components/Dialog';
+import Modal from '../src';
+import { IModalEvents } from '../src/components/Modal';
+import { whichAnimationEvent } from '../src/utilities';
 
-jest.mock('../utilities/whichAnimationEvent');
+jest.mock('../src/utilities');
 
 afterEach(cleanup);
 
