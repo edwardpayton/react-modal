@@ -1,14 +1,12 @@
-import React from 'react';
-
 import Close from './Close';
-import { whichAnimationEvent } from '../utilities';
-
+import React from 'react';
 import styles from '../styles/Dialog.module.css';
+import { whichAnimationEvent } from '../utilities';
 
 export interface IProps {
   isComplete: boolean;
   isErrored: boolean;
-  type: string;
+  image: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
@@ -16,7 +14,7 @@ export interface IProps {
 const Dialog: React.FunctionComponent<IProps> = ({
   isComplete,
   isErrored,
-  type,
+  image,
   onClose,
   children,
 }) => {
@@ -25,8 +23,7 @@ const Dialog: React.FunctionComponent<IProps> = ({
   const { end } = whichAnimationEvent();
 
   const cssComplete = isComplete ? styles.complete : null;
-  const cssType =
-    type === 'inline' ? styles['type-inline'] : styles['type-image'];
+  const cssType = image ? styles['type-image'] : styles['type-inline'];
 
   let focusableEls: NodeListOf<Element> | null; // A collection of all focusable dom nodes inside the modal
 
@@ -105,21 +102,19 @@ const Dialog: React.FunctionComponent<IProps> = ({
       <div className={[styles.panel, cssType].join(' ')}>
         <Close onClick={handleClose} onKeyDown={handleKeyDown} />
         <div className={styles.panelBody} tabIndex={0}>
-          <div>
-            {!isComplete && !isErrored && (
-              <div className={styles.loading}>
-                <p>Loading...</p>
-              </div>
-            )}
+          {!isComplete && !isErrored && (
+            <div className={styles.loading}>
+              <p>Loading...</p>
+            </div>
+          )}
 
-            {isErrored && (
-              <div className={styles.error}>
-                <p>There was a problem opening this content</p>
-              </div>
-            )}
+          {isErrored && (
+            <div className={styles.error}>
+              <p>There was a problem opening this content</p>
+            </div>
+          )}
 
-            <div className={styles.content}>{children}</div>
-          </div>
+          <div className={styles.content}>{children}</div>
         </div>
       </div>
     </div>

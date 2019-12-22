@@ -1,5 +1,5 @@
 declare const styles: {
-  readonly "modal": string;
+  readonly "overlay": string;
   readonly "panel": string;
   readonly "panelBody": string;
   readonly "content": string;
@@ -17,4 +17,3 @@ declare const styles: {
   readonly "entrancePanel_small": string;
 };
 export = styles;
-

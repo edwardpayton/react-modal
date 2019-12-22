@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from '../styles/Trigger.module.css';
 
 export interface IProps {

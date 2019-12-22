@@ -1,12 +1,13 @@
-.modal {
+.overlay {
   display: block;
   position: fixed;
-  content: "";
+  content: '';
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(4, 0, 27, 0.5);
+  background: hsla(0, 100%, 0%, 0.2);
+  backdrop-filter: blur(2px);
   border: 1px solid silver;
   text-align: center;
   overflow: hidden;
@@ -14,7 +15,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.panel {
+.dialog {
   position: relative;
   left: 0;
   right: 0;
@@ -33,11 +34,16 @@
   margin: 0 5px;
   padding: 30px;
   border-radius: 3px;
+  box-shadow: 0 4.1px 6.9px rgba(0, 0, 0, 0.018),
+    0 8.3px 13.4px rgba(0, 0, 0, 0.026), 0 13px 19.6px rgba(0, 0, 0, 0.032),
+    0 18.7px 26.1px rgba(0, 0, 0, 0.037), 0 26.7px 34px rgba(0, 0, 0, 0.044),
+    0 41.5px 48.3px rgba(0, 0, 0, 0.052), 0 104px 96px rgba(0, 0, 0, 0.07);
+  /* https://brumm.af/shadows */
 }
 
-.panel:before {
+.dialog:before {
   position: absolute;
-  content: "";
+  content: '';
   background-color: #fff;
   left: 0;
   right: 0;
@@ -46,7 +52,7 @@
   z-index: 1;
 }
 
-.panelBody {
+.dialogBody {
   position: relative;
   height: 100%;
   max-height: 100%;
@@ -54,10 +60,10 @@
   overflow-y: auto;
   z-index: 2;
 }
-.panelBody:focus {
+.dialogBody:focus {
   outline: 1px solid rgba(38, 0, 230, 0.2);
 }
-.panelBody:focus:active {
+.dialogBody:focus:active {
   outline: none;
 }
 
@@ -79,10 +85,12 @@
   text-align: center;
 }
 
-.type-inline {}
+.type-inline {
+}
 
 .type-image {
-  width:auto;
+  width: auto;
+  height: auto;
 }
 
 .type-image img {
@@ -91,19 +99,19 @@
 }
 
 /* Animations */
-.modal,
-.panel,
+.overlay,
+.dialog,
 .content {
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
 }
 
-.modal {
+.overlay {
   animation-name: entranceOverlay;
   animation-duration: 0.25s;
 }
 
-.panel {
+.dialog {
   animation-name: entrancePanel;
   animation-duration: 0.35s;
   animation-timing-function: cubic-bezier(0.17, 0.89, 0.3, 1.2);
@@ -114,7 +122,7 @@
   animation-duration: 0.5s;
 }
 
-:global(.modal-closing) .modal {
+:global(.modal-closing) .overlay {
   animation-name: exitOverlay;
 }
 
@@ -167,7 +175,7 @@
   }
 }
 
-@keyframes entrancePanel {
+@keyframes entranceDialog {
   0% {
     opacity: 0;
     transform: translateY(-20%) scale(0.5);
@@ -180,7 +188,7 @@
   }
 }
 
-@keyframes entrancePanel_small {
+@keyframes entranceDialog_small {
   0% {
     opacity: 0;
     transform: translateY(0);

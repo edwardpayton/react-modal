@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from '../styles/Close.module.css';
 
 export interface IProps {

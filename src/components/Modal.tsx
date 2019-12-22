@@ -1,10 +1,9 @@
-import React from 'react';
+import '../styles/global.css';
 
 import Dialog from './Dialog';
 import Portal from './Portal';
+import React from 'react';
 import Trigger from './Trigger';
-
-import '../styles/global.css';
 
 export interface IModalEvents {
   onOpen?: () => void;
@@ -28,14 +27,14 @@ export interface IModalEvents {
 
 export interface IProps {
   title: string;
-  type?: 'inline' | 'image';
+  image?: boolean;
   events?: IModalEvents;
   children: React.ReactNode;
 }
 
 const Modal: React.FunctionComponent<IProps> = ({
   title,
-  type = 'inline',
+  image = false,
   events,
   children,
 }) => {
@@ -73,6 +72,22 @@ const Modal: React.FunctionComponent<IProps> = ({
     handleFocus();
     setOpen(true);
     setComplete(false);
+    if (image) {
+      return handleOpenImage();
+    }
+    completeLoad();
+  };
+
+  const handleOpenImage = () => {
+    const { props } = children as React.ReactElement;
+    if (!props.src) return setErrored(true);
+    const img = new Image();
+    img.src = props.src;
+    img.onload = () => completeLoad();
+    img.onerror = () => setErrored(true);
+  };
+
+  const completeLoad = () => {
     if (children === undefined) return handleError();
     document.body.classList.add('modal-open');
     setComplete(true);
@@ -92,8 +107,8 @@ const Modal: React.FunctionComponent<IProps> = ({
           <Dialog
             isComplete={complete}
             isErrored={errored}
-            type={type}
             onClose={handleClose}
+            image={image}
           >
             {children}
           </Dialog>
