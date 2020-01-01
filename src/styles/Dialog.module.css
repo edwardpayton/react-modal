@@ -1,78 +1,97 @@
+/* Full screen overlay background color */
 .overlay {
-  display: block;
   position: fixed;
-  content: '';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  overflow: auto;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: hsla(0, 100%, 0%, 0.2);
-  backdrop-filter: blur(2px);
-  border: 1px solid silver;
-  text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  background: hsla(244, 15%, 47%, 0.2); /* #1000f0 at 15% saturation */
+  backdrop-filter: blur(5px);
+  z-index: -1;
 }
 
+/* Dialog window frame & background */
 .dialog {
-  position: relative;
-  left: 0;
-  right: 0;
+  position: fixed;
   display: inline-block;
   white-space: normal;
-  vertical-align: middle;
-  text-align: left;
-  overflow: hidden;
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  min-width: 150px;
-  min-height: 150px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  min-width: 200px;
+  min-height: 200px;
   max-width: 850px;
   max-height: 650px;
-  top: 50%;
-  margin: 0 5px;
-  padding: 30px;
-  border-radius: 3px;
-  box-shadow: 0 4.1px 6.9px rgba(0, 0, 0, 0.018),
-    0 8.3px 13.4px rgba(0, 0, 0, 0.026), 0 13px 19.6px rgba(0, 0, 0, 0.032),
-    0 18.7px 26.1px rgba(0, 0, 0, 0.037), 0 26.7px 34px rgba(0, 0, 0, 0.044),
-    0 41.5px 48.3px rgba(0, 0, 0, 0.052), 0 104px 96px rgba(0, 0, 0, 0.07);
+  margin: 0 auto;
+  padding: 30px 10px 10px;
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 0 0.5px 0.5px hsla(0, 0%, 0%, 0.02),
+    0 1px 1.5px hsla(0, 0%, 0%, 0.03), 0 1.5px 2.5px hsla(0, 0%, 0%, 0.03),
+    0 2.5px 4px hsla(0, 0%, 0%, 0.04), 0 4px 7px hsla(0, 0%, 0%, 0.04),
+    0 7px 12px hsla(0, 0%, 0%, 0.05), 0 15px 25px hsla(0, 0%, 0%, 0.07);
   /* https://brumm.af/shadows */
 }
 
-.dialog:before {
-  position: absolute;
-  content: '';
-  background-color: #fff;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
+.dialogSmallScreen {
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
 }
 
+/* Dialog content body */
 .dialogBody {
   position: relative;
   height: 100%;
   max-height: 100%;
+  padding: 0 20px;
   overflow: hidden;
   overflow-y: auto;
   z-index: 2;
+  -webkit-overflow-scrolling: touch;
 }
 .dialogBody:focus {
-  outline: 1px solid rgba(38, 0, 230, 0.2);
+  outline: 1px solid hsla(38, 0, 230, 0.2);
 }
 .dialogBody:focus:active {
   outline: none;
 }
 
+/* Dialog overflow scrollbar */
+.dialogBody::-webkit-scrollbar {
+  width: 8px;
+  opacity: 0;
+}
+.dialogBody {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(0, 0%, 90%) transparent;
+}
+.dialogBody::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dialogBody::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+.dialogBody:hover::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 0%, 90%);
+}
+
+/* Dialog content */
 .content {
-  height: 100%;
-  max-height: 100%;
   display: none;
   margin-top: 0;
-
+  overflow: auto; /* prevents child margin effecting scroll */
   opacity: 1;
   transition: opacity 0.1s ease;
 }
@@ -88,14 +107,28 @@
 .type-inline {
 }
 
+/* Type image */
 .type-image {
   width: auto;
   height: auto;
+  line-height: 0;
+  text-align: center;
+}
+
+.type-image .dialogBody {
+  padding-bottom: 20px;
+  height: calc(100% - 20px);
+  max-height: calc(100% - 20px);
+}
+
+.type-image .content {
+  height: 100%;
 }
 
 .type-image img {
-  max-height: 100%;
   width: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* Animations */
@@ -103,7 +136,7 @@
 .dialog,
 .content {
   animation-fill-mode: forwards;
-  animation-timing-function: ease-out;
+  animation-timing-function: cubic-bezier(0, 0, 0.25, 1);
 }
 
 .overlay {
@@ -112,14 +145,9 @@
 }
 
 .dialog {
-  animation-name: entrancePanel;
+  animation-name: entranceDialog;
   animation-duration: 0.35s;
-  animation-timing-function: cubic-bezier(0.17, 0.89, 0.3, 1.2);
-}
-
-:not(.-isType-inline) .content {
-  animation-name: entranceContent;
-  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.15, 0.9, 0.24, 1);
 }
 
 :global(.modal-closing) .overlay {
@@ -134,15 +162,8 @@
   display: block;
 }
 .complete .content {
-  display: block;
+  display: inline-block;
 }
-
-/* Media queries */
-/* @media only screen and (min-width: 500px) {
-    .panel {
-        animation-timing-function: cubic-bezier(.17,.89,.3,1.2);
-    }
-} */
 
 /* Keyframes */
 @keyframes entranceContent {
@@ -178,25 +199,12 @@
 @keyframes entranceDialog {
   0% {
     opacity: 0;
-    transform: translateY(-20%) scale(0.5);
+    transform: scale(0.7);
     z-index: -1;
   }
   100% {
     opacity: 1;
-    transform: translateY(-50%) scale(1);
-    z-index: 100;
-  }
-}
-
-@keyframes entranceDialog_small {
-  0% {
-    opacity: 0;
-    transform: translateY(0);
-    z-index: -1;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(-50%);
+    transform: scale(1);
     z-index: 100;
   }
 }

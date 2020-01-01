@@ -72,9 +72,7 @@ const Modal: React.FunctionComponent<IProps> = ({
     handleFocus();
     setOpen(true);
     setComplete(false);
-    if (image) {
-      return handleOpenImage();
-    }
+    if (image) return handleOpenImage();
     completeLoad();
   };
 
@@ -83,7 +81,10 @@ const Modal: React.FunctionComponent<IProps> = ({
     if (!props.src) return setErrored(true);
     const img = new Image();
     img.src = props.src;
-    img.onload = () => completeLoad();
+    const complete = () => {
+      return completeLoad();
+    };
+    img.onload = complete;
     img.onerror = () => setErrored(true);
   };
 
@@ -108,7 +109,7 @@ const Modal: React.FunctionComponent<IProps> = ({
             isComplete={complete}
             isErrored={errored}
             onClose={handleClose}
-            image={image}
+            isImage={image}
           >
             {children}
           </Dialog>

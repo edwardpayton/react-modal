@@ -18,7 +18,7 @@ const ModalClose: React.FunctionComponent<IProps> = ({
       type="button"
       data-testid="close"
     >
-      <span>Close popup</span>
+      <span>Close</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         aria-labelledby="xTitle"

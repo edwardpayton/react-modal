@@ -1,19 +1,38 @@
-export interface IAnimationEvent {
-  name?: string;
-  end?: string;
+/** Detect css animation event name
+ *
+ */
+export interface Animation {
+  name: string;
+  end: string;
 }
 
-export function whichAnimationEvent(): IAnimationEvent {
+export function whichAnimationEvent(): Animation | undefined {
   const elem = document.createElement('div');
-  const animations = [
+  const animations: Animation[] = [
     { name: 'animation', end: 'animationend' },
     { name: 'OAnimation', end: 'webkitAnimationEnd' },
     { name: 'MozAnimation', end: 'animationend' },
     { name: 'WebkitAnimation', end: 'webkitAnimationEnd' },
   ];
 
-  for (const name in animations) {
-    if (elem.style[name] !== undefined) return animations[name];
+  for (const anim in animations) {
+    const { name } = animations[anim];
+    if (elem.style[name as any] !== undefined) return animations[anim];
   }
-  return {};
+  return undefined;
+}
+
+/** Simple throttle function
+ * @param cb callback function
+ * @param time throttle delay, defaults to 500ms
+ */
+export function simpleThrottle(cb: () => void, time = 500) {
+  var lastTime = 0;
+  return function() {
+    var now = +new Date();
+    if (now - lastTime >= time) {
+      cb();
+      lastTime = now;
+    }
+  };
 }

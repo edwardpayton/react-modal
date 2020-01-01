@@ -1,7 +1,8 @@
 declare const styles: {
   readonly "overlay": string;
-  readonly "panel": string;
-  readonly "panelBody": string;
+  readonly "dialog": string;
+  readonly 'dialogSmallScreen': string;
+  readonly "dialogBody": string;
   readonly "content": string;
   readonly "loading": string;
   readonly "error": string;
