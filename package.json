@@ -52,6 +52,6 @@
     "rollup-plugin-postcss": "^2.0.3",
     "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.4"
   }
 }
