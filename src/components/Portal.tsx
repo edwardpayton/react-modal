@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 
 import { createPortal } from 'react-dom';
 
-export interface IProps {
+export interface Props {
   children: React.ReactNode;
 }
 
-const Portal: React.FC<IProps> = ({ children }: IProps) => {
+const Portal: React.FC<Props> = ({ children }: Props) => {
   const container = useRef(document.createElement('div'));
 
   useEffect(() => {

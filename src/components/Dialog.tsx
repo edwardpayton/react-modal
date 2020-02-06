@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../styles/Dialog.module.css';
 import { whichAnimationEvent, simpleThrottle } from '../utilities';
 
-export interface IProps {
+export interface Props {
   isComplete: boolean;
   isErrored: boolean;
   isImage: boolean;
@@ -11,7 +11,7 @@ export interface IProps {
   children: React.ReactNode;
 }
 
-const Dialog: React.FunctionComponent<IProps> = ({
+const Dialog: React.FunctionComponent<Props> = ({
   isComplete,
   isErrored,
   isImage,

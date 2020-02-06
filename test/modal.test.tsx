@@ -3,20 +3,31 @@ import { render, fireEvent, cleanup, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import Modal from '../src';
-import { IModalEvents } from '../src/components/Modal';
+import { ModalEvents } from '../src/components/Modal';
 import { whichAnimationEvent } from '../src/utilities';
 
 jest.mock('../src/utilities');
 
-afterEach(cleanup);
-
 describe('Modal Component', () => {
   let testModalText: string;
-  let testEvents: IModalEvents;
+  let testEvents: ModalEvents;
   let modal: React.ReactElement;
 
+  let imageLoad = () => null;
+  const setImageOnload = () => {
+    Object.defineProperty(Image.prototype, 'onload', {
+      get: function() {
+        return this._onload;
+      },
+      set: function(fn) {
+        imageLoad = fn;
+        this._onload = fn;
+      },
+    });
+  };
+
   beforeEach(() => {
-    (whichAnimationEvent as jest.Mock).mockReturnValue({});
+    (whichAnimationEvent as jest.Mock).mockReturnValue(undefined);
     testModalText = 'modal content';
     testEvents = {
       onOpen: jest.fn(),
@@ -28,6 +39,8 @@ describe('Modal Component', () => {
       </Modal>
     );
   });
+
+  afterEach(cleanup);
 
   describe('rendering & click functionality', () => {
     it('renders without crashing', () => {
@@ -43,15 +56,19 @@ describe('Modal Component', () => {
       expect(testEvents.onOpen).toHaveBeenCalledTimes(1);
     });
 
-    it('opens type image on click', () => {
+    it('opens type image on click', async () => {
       const modalImage = (
-        <Modal title={'trigger text'} events={testEvents} type="image">
-          <img src="" alt="test-pic" />
+        <Modal title={'trigger text'} events={testEvents} image>
+          <img src="https://placeimg.com/100/100/any" alt="test-pic" />
         </Modal>
       );
       const { getByTestId, queryAllByAltText } = render(modalImage);
-      fireEvent.click(getByTestId('trigger'));
-      expect(testEvents.onOpen).toHaveBeenCalledTimes(1);
+      setImageOnload();
+      act(() => {
+        fireEvent.click(getByTestId('trigger'));
+        imageLoad();
+      });
+      expect(await testEvents.onOpen).toHaveBeenCalledTimes(1);
       expect(queryAllByAltText('test-pic')).toBeTruthy();
     });
 

@@ -5,7 +5,7 @@ import Portal from './Portal';
 import React from 'react';
 import Trigger from './Trigger';
 
-export interface IModalEvents {
+export interface ModalEvents {
   onOpen?: () => void;
   onClose?: () => void;
   onError?: () => void;
@@ -25,14 +25,15 @@ export interface IModalEvents {
  *
  */
 
-export interface IProps {
+export interface Props {
   title: string;
   image?: boolean;
-  events?: IModalEvents;
+  src?: string;
+  events?: ModalEvents;
   children: React.ReactNode;
 }
 
-const Modal: React.FunctionComponent<IProps> = ({
+const Modal: React.FunctionComponent<Props> = ({
   title,
   image = false,
   events,

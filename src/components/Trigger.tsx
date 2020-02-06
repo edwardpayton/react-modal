@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from '../styles/Trigger.module.css';
 
-export interface IProps {
+export interface Props {
   title: string;
   onClick: () => void;
   onKeyDown: any; // TODO
 }
 
-const ModalTrigger: React.FunctionComponent<IProps> = ({
+const ModalTrigger: React.FunctionComponent<Props> = ({
   title,
   onClick,
   onKeyDown,

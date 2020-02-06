@@ -1,15 +1,12 @@
 import React from 'react';
 import styles from '../styles/Close.module.css';
 
-export interface IProps {
+export interface Props {
   onClick: () => void;
   onKeyDown: any; // TODO
 }
 
-const ModalClose: React.FunctionComponent<IProps> = ({
-  onClick,
-  onKeyDown,
-}) => {
+const ModalClose: React.FunctionComponent<Props> = ({ onClick, onKeyDown }) => {
   return (
     <button
       className={styles.close}
