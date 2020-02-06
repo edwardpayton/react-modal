@@ -1,14 +1,14 @@
 {
-  "name": "@testingejp/react-modal",
+  "name": "@ejp/react-modal",
   "version": "1.2.0",
   "license": "MIT",
   "author": "Edward Payton",
   "bugs": {
-    "url": "https://gitlab.com/edwardpayton/react-modal/issues"
+    "url": "https://github.com/edwardpayton/react-modal/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/edwardpayton/react-modal.git"
+    "url": "https://github.com/edwardpayton/react-modal.git"
   },
   "main": "dist/index.js",
   "module": "dist/react-modal.esm.js",
