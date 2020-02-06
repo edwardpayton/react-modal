@@ -48,7 +48,7 @@
     "husky": "^4.2.1",
     "identity-obj-proxy": "^3.0.0",
     "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react-dom": "^16.12.0",
     "rollup-plugin-postcss": "^2.0.3",
     "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
