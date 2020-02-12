@@ -13,7 +13,8 @@ export interface ModalEvents {
 
 /**
  * Todo
- * - type-image may not be needed
+ * - type-image - remove need for child image, make src a prop
+ * - overloads for type inline & image
  * - should content overflow with scrollbar
  * - modal within modal
  * - https://github.com/pikapkg/pack
