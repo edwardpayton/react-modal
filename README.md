@@ -28,8 +28,6 @@
 
 `yarn add @ejp/react-modal`
 
-A small utility hook to use Axios in your React components, with a simple and familiar API.
-
 ## USAGE
 
 ```javascript
